@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Preloader } from "@/components/Preloader";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Leadership from "./pages/Leadership";
@@ -26,12 +27,13 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        {isLoading && <Preloader onLoadingComplete={() => setIsLoading(false)} />}
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <TooltipProvider>
+          {isLoading && <Preloader onLoadingComplete={() => setIsLoading(false)} />}
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
             <Route path="/about/board" element={<Leadership />} />
@@ -51,9 +53,10 @@ const App = () => {
             <Route path="/events" element={<Events />} />
             <Route path="/export-facility" element={<Products />} />
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 };

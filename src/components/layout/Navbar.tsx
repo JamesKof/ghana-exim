@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, MessageCircle, MapPin, Phone, Clock } from "lucide-react";
+import { Menu, X, ChevronDown, MessageCircle, MapPin, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import geximLogo from "@/assets/gexim-logo.png";
 import { TopBar } from "./TopBar";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const officeLocations = [
   {
@@ -238,6 +239,7 @@ export function Navbar() {
 
             {/* CTA Button */}
             <div className="hidden lg:flex items-center gap-3">
+              <ThemeToggle />
               <Link
                 to="/contact"
                 className="p-3 rounded-full transition-all duration-300 bg-muted text-foreground hover:bg-muted/80"
@@ -324,6 +326,10 @@ export function Navbar() {
                 </div>
                 
                 <div className="pt-4 space-y-3">
+                  <div className="flex items-center justify-between px-4 py-2">
+                    <span className="text-sm text-muted-foreground">Theme</span>
+                    <ThemeToggle />
+                  </div>
                   <Link
                     to="/contact"
                     className="block text-center px-6 py-3 rounded-full text-sm font-semibold border border-border hover:bg-muted transition-colors"
