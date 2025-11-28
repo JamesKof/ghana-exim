@@ -1,9 +1,42 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
+import { Menu, X, ChevronDown, MessageCircle, MapPin, Phone, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import geximLogo from "@/assets/gexim-logo.png";
 import { TopBar } from "./TopBar";
+
+const officeLocations = [
+  {
+    name: "Head Office - Accra",
+    address: "Africa Trade House, Ambassadorial Enclave, Liberia Road, Accra",
+    gps: "GL-040-2630",
+    phone: "0302-234668",
+  },
+  {
+    name: "Kumasi Branch",
+    address: "First Floor A2 Plaza Building, Dr. Osei Tuffuor By-Pass, Santasi",
+    gps: "AK-178-6780",
+    phone: "0322-041124",
+  },
+  {
+    name: "Tamale Branch",
+    address: "2nd Floor SSNIT Pension Tower, Dagomba Street, Tamale",
+    gps: "NT-0010-5301",
+    phone: "0372-028053",
+  },
+  {
+    name: "Takoradi Branch",
+    address: "Ground Floor, Ghana Shippers' Authority, Chapel Hill, Takoradi",
+    gps: "WS-349-3552",
+    phone: "0312-002262",
+  },
+  {
+    name: "Ho Branch",
+    address: "2nd Floor, Atsu Briggar's Plaza, Muvie Street, Ho",
+    gps: "VH-0003-4357",
+    phone: "0362-027773",
+  },
+];
 
 const mainNavItems = [
   { name: "Home", href: "/" },
@@ -42,6 +75,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [showLocationsMega, setShowLocationsMega] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -55,6 +89,7 @@ export function Navbar() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setOpenDropdown(null);
+    setShowLocationsMega(false);
   }, [location.pathname]);
 
   const isHomePage = location.pathname === "/";
@@ -120,7 +155,7 @@ export function Navbar() {
                   {/* Dropdown */}
                   {item.children && openDropdown === item.name && (
                     <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 animate-fade-in">
-                      <div className="glass rounded-2xl shadow-gexim-xl py-2 min-w-[220px] overflow-hidden">
+                      <div className="bg-card rounded-2xl shadow-gexim-xl py-2 min-w-[220px] overflow-hidden border border-border">
                         {item.children.map((child) => (
                           <Link
                             key={child.name}
@@ -135,6 +170,70 @@ export function Navbar() {
                   )}
                 </div>
               ))}
+              
+              {/* Office Locations Mega Menu Trigger */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setShowLocationsMega(true)}
+                onMouseLeave={() => setShowLocationsMega(false)}
+              >
+                <button
+                  className={cn(
+                    "nav-pill flex items-center gap-1",
+                    showLocationsMega
+                      ? "nav-pill-active"
+                      : "text-foreground/80 hover:text-foreground hover:bg-muted"
+                  )}
+                >
+                  <MapPin className="w-4 h-4" />
+                  Locations
+                  <ChevronDown className={cn(
+                    "w-3 h-3 transition-transform",
+                    showLocationsMega && "rotate-180"
+                  )} />
+                </button>
+
+                {/* Mega Menu for Locations */}
+                {showLocationsMega && (
+                  <div className="absolute top-full right-0 pt-3 animate-fade-in">
+                    <div className="bg-card rounded-2xl shadow-gexim-xl overflow-hidden border border-border w-[600px]">
+                      <div className="bg-primary p-4">
+                        <h3 className="text-lg font-bold text-primary-foreground flex items-center gap-2">
+                          <MapPin className="w-5 h-5 text-accent" />
+                          Our Office Locations
+                        </h3>
+                        <p className="text-primary-foreground/70 text-sm">Visit us at any of our branches across Ghana</p>
+                      </div>
+                      <div className="p-4 grid grid-cols-2 gap-3">
+                        {officeLocations.map((office) => (
+                          <div 
+                            key={office.name}
+                            className="p-4 rounded-xl bg-muted/50 hover:bg-muted transition-colors"
+                          >
+                            <h4 className="font-semibold text-foreground text-sm mb-2">{office.name}</h4>
+                            <p className="text-xs text-muted-foreground mb-2 line-clamp-2">{office.address}</p>
+                            <div className="flex items-center gap-4 text-xs">
+                              <span className="text-accent font-medium">{office.gps}</span>
+                              <span className="flex items-center gap-1 text-muted-foreground">
+                                <Phone className="w-3 h-3" />
+                                {office.phone}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="px-4 pb-4">
+                        <Link
+                          to="/contact"
+                          className="block text-center py-3 bg-primary text-primary-foreground rounded-xl font-medium text-sm hover:bg-primary/90 transition-colors"
+                        >
+                          Contact Us
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* CTA Button */}
@@ -170,7 +269,7 @@ export function Navbar() {
 
         {/* Mobile menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden glass-nav border-t border-border/50 rounded-b-3xl animate-fade-in">
+          <div className="lg:hidden bg-card border-t border-border/50 rounded-b-3xl animate-fade-in">
             <div className="px-4 py-6">
               <nav className="space-y-2">
                 {mainNavItems.map((item) => (
@@ -201,6 +300,29 @@ export function Navbar() {
                     )}
                   </div>
                 ))}
+                
+                {/* Mobile Office Locations */}
+                <div className="pt-4 border-t border-border">
+                  <p className="px-4 py-2 text-sm font-semibold text-foreground flex items-center gap-2">
+                    <MapPin className="w-4 h-4 text-accent" />
+                    Office Locations
+                  </p>
+                  <div className="space-y-2 mt-2">
+                    {officeLocations.slice(0, 3).map((office) => (
+                      <div key={office.name} className="px-4 py-2 bg-muted/50 rounded-xl mx-2">
+                        <p className="text-sm font-medium text-foreground">{office.name}</p>
+                        <p className="text-xs text-muted-foreground">{office.phone}</p>
+                      </div>
+                    ))}
+                    <Link 
+                      to="/contact" 
+                      className="block px-4 py-2 text-sm text-primary font-medium hover:underline"
+                    >
+                      View All Locations →
+                    </Link>
+                  </div>
+                </div>
+                
                 <div className="pt-4 space-y-3">
                   <Link
                     to="/contact"
