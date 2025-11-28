@@ -68,8 +68,7 @@ const mainNavItems = [
       { name: "Gallery", href: "/gallery" },
     ],
   },
-  { name: "FAQs", href: "/faqs" },
-  { name: "Careers", href: "/careers" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -127,7 +126,7 @@ export function Navbar() {
               </Link>
 
             {/* Desktop navigation - Centered */}
-            <div className="hidden lg:flex items-center gap-1 bg-muted/50 rounded-full p-1.5">
+            <div className="hidden lg:flex items-center gap-2 bg-muted/50 rounded-full p-1.5">
               {mainNavItems.map((item) => (
                 <div
                   key={item.name}
@@ -241,13 +240,6 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-3">
               <ThemeToggle />
               <Link
-                to="/contact"
-                className="p-3 rounded-full transition-all duration-300 bg-muted text-foreground hover:bg-muted/80"
-                title="Contact Us"
-              >
-                <MessageCircle className="w-5 h-5" />
-              </Link>
-              <Link
                 to="/apply"
                 className="btn-gold px-6 py-3 text-sm font-semibold"
               >
@@ -330,12 +322,6 @@ export function Navbar() {
                     <span className="text-sm text-muted-foreground">Theme</span>
                     <ThemeToggle />
                   </div>
-                  <Link
-                    to="/contact"
-                    className="block text-center px-6 py-3 rounded-full text-sm font-semibold border border-border hover:bg-muted transition-colors"
-                  >
-                    Contact Us
-                  </Link>
                   <Link
                     to="/apply"
                     className="btn-gold block text-center px-6 py-3 text-sm font-semibold"

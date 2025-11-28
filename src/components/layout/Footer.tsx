@@ -7,8 +7,14 @@ const quickLinks = [
   { name: "Products", href: "/products" },
   { name: "Services", href: "/services" },
   { name: "News & Events", href: "/news" },
-  { name: "Careers", href: "/careers" },
+  { name: "Gallery", href: "/gallery" },
+];
+
+const supportLinks = [
+  { name: "Get Help", href: "/apply" },
   { name: "FAQs", href: "/faqs" },
+  { name: "Careers", href: "/careers" },
+  { name: "Contact Us", href: "/contact" },
 ];
 
 const products = [
@@ -49,7 +55,7 @@ export function Footer() {
     <footer className="bg-primary text-primary-foreground">
       {/* Main Footer */}
       <div className="container-custom section-padding">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block mb-6">
@@ -102,6 +108,23 @@ export function Footer() {
                     className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 text-sm"
                   >
                     {product.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h3 className="text-lg font-semibold mb-6">Support</h3>
+            <ul className="space-y-3">
+              {supportLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-primary-foreground/80 hover:text-accent transition-colors duration-200 text-sm"
+                  >
+                    {link.name}
                   </Link>
                 </li>
               ))}
