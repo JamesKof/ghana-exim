@@ -1,5 +1,8 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, MapPin, ChevronLeft, ChevronRight } from "lucide-react";
+import { BranchLocationsModal } from "./BranchLocationsModal";
+import { cn } from "@/lib/utils";
 
 const objectives = [
   "Support and develop trade between Ghana and other countries",
@@ -8,7 +11,61 @@ const objectives = [
   "Offer guarantees and insurance against trade risks",
 ];
 
+const galleryImages = [
+  {
+    url: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600",
+    alt: "Modern banking headquarters",
+    caption: "GEXIM Headquarters"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600",
+    alt: "Team collaboration",
+    caption: "Our Dedicated Team"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600",
+    alt: "Business meeting",
+    caption: "Client Partnerships"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=600",
+    alt: "International trade",
+    caption: "Global Trade Support"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600",
+    alt: "Team discussion",
+    caption: "Expert Advisory"
+  },
+  {
+    url: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600",
+    alt: "Professional workspace",
+    caption: "Innovation Hub"
+  },
+];
+
 export function AboutSection() {
+  const [activeImage, setActiveImage] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const interval = setInterval(() => {
+      setActiveImage((prev) => (prev + 1) % galleryImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
+
+  const nextImage = () => {
+    setIsAutoPlaying(false);
+    setActiveImage((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const prevImage = () => {
+    setIsAutoPlaying(false);
+    setActiveImage((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  };
+
   return (
     <section className="section-padding bg-background relative overflow-hidden">
       {/* Decorative elements */}
@@ -17,47 +74,109 @@ export function AboutSection() {
 
       <div className="container-custom relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image Grid */}
+          {/* Image Gallery Grid */}
           <div className="relative order-2 lg:order-1">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-gexim-xl hover-lift">
+            {/* Main featured image */}
+            <div 
+              className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-gexim-xl group"
+              onMouseEnter={() => setIsAutoPlaying(false)}
+              onMouseLeave={() => setIsAutoPlaying(true)}
+            >
+              {galleryImages.map((image, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    "absolute inset-0 transition-all duration-700",
+                    activeImage === index 
+                      ? "opacity-100 scale-100" 
+                      : "opacity-0 scale-105"
+                  )}
+                >
                   <img
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600"
-                    alt="Modern banking"
+                    src={image.url}
+                    alt={image.alt}
                     className="w-full h-full object-cover"
                   />
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  {/* Caption */}
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <p className="text-white font-semibold text-lg">{image.caption}</p>
+                  </div>
                 </div>
-                <div className="aspect-square rounded-3xl overflow-hidden shadow-gexim hover-lift">
-                  <img
-                    src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400"
-                    alt="International trade"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-              <div className="pt-12 space-y-4">
-                <div className="aspect-square rounded-3xl overflow-hidden shadow-gexim hover-lift">
-                  <img
-                    src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=400"
-                    alt="Shipping containers"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-gexim-xl hover-lift">
-                  <img
-                    src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600"
-                    alt="Business meeting"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+              ))}
+              
+              {/* Navigation arrows */}
+              <button
+                onClick={prevImage}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/40"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/40"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
 
-            {/* Floating card */}
-            <div className="absolute -bottom-4 -right-4 lg:right-auto lg:-left-4 glass p-6 rounded-3xl shadow-gexim-xl max-w-[220px] animate-float">
-              <p className="text-5xl font-bold text-primary mb-2">Act 911</p>
-              <p className="text-sm text-muted-foreground">Ghana Export-Import Bank Act 2016</p>
+            {/* Thumbnail strip */}
+            <div className="flex gap-2 mt-4 overflow-x-auto pb-2">
+              {galleryImages.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setActiveImage(index);
+                    setIsAutoPlaying(false);
+                  }}
+                  className={cn(
+                    "relative flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden transition-all duration-300",
+                    activeImage === index 
+                      ? "ring-2 ring-primary ring-offset-2 ring-offset-background scale-105" 
+                      : "opacity-60 hover:opacity-100"
+                  )}
+                >
+                  <img
+                    src={image.url}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+
+            {/* Progress indicators */}
+            <div className="flex justify-center gap-1.5 mt-4">
+              {galleryImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setActiveImage(index);
+                    setIsAutoPlaying(false);
+                  }}
+                  className={cn(
+                    "h-1.5 rounded-full transition-all duration-300",
+                    activeImage === index 
+                      ? "w-8 bg-primary" 
+                      : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  )}
+                />
+              ))}
+            </div>
+
+            {/* Floating card with branch finder */}
+            <div className="absolute -bottom-6 -right-4 lg:right-auto lg:-left-6 glass p-5 rounded-3xl shadow-gexim-xl max-w-[240px] animate-float">
+              <p className="text-4xl font-bold text-primary mb-1">Act 911</p>
+              <p className="text-sm text-muted-foreground mb-3">Ghana Export-Import Bank Act 2016</p>
+              <BranchLocationsModal 
+                trigger={
+                  <button className="w-full px-4 py-2 bg-primary/10 hover:bg-primary/20 rounded-xl text-primary font-medium text-sm flex items-center justify-center gap-2 transition-colors">
+                    <MapPin className="w-4 h-4" />
+                    Find a Branch
+                  </button>
+                }
+              />
             </div>
           </div>
 
@@ -88,13 +207,16 @@ export function AboutSection() {
               ))}
             </div>
 
-            <Link
-              to="/about"
-              className="btn-gold px-8 py-4 inline-flex items-center gap-3 group text-lg font-semibold"
-            >
-              Learn More About Us
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                to="/about"
+                className="btn-gold px-8 py-4 inline-flex items-center gap-3 group text-lg font-semibold"
+              >
+                Learn More About Us
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <BranchLocationsModal />
+            </div>
           </div>
         </div>
       </div>
