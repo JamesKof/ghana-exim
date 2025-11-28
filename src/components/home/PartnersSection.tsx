@@ -1,36 +1,55 @@
 const partners = [
-  { name: "GEPA", logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200" },
-  { name: "Ghana Trade Association", logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200" },
-  { name: "Hungary EXIM", logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200" },
-  { name: "G-NEXID", logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200" },
-  { name: "Ministry of Trade", logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200" },
-  { name: "Afreximbank", logo: "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=200" },
+  { name: "GEPA", initials: "GEPA" },
+  { name: "Ghana Trade Association", initials: "GTA" },
+  { name: "Hungary EXIM", initials: "HEXIM" },
+  { name: "G-NEXID", initials: "GNX" },
+  { name: "Ministry of Trade", initials: "MoTI" },
+  { name: "Afreximbank", initials: "AFX" },
 ];
 
 export function PartnersSection() {
   return (
-    <section className="py-16 bg-background border-y border-border">
-      <div className="container-custom">
+    <section className="py-20 bg-background relative overflow-hidden">
+      {/* Subtle background decoration */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[200px] bg-gradient-to-r from-transparent via-primary/10 to-transparent blur-3xl" />
+      </div>
+
+      <div className="container-custom relative z-10">
         <div className="text-center mb-12">
-          <span className="text-accent font-semibold text-sm uppercase tracking-wider">
+          <span className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent font-semibold text-sm uppercase tracking-wider mb-4">
             Trusted Partnerships
           </span>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mt-3">
-            Our Partners
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+            Our Partners & Collaborators
           </h2>
         </div>
 
-        <div className="grid grid-cols-3 md:grid-cols-6 gap-8 items-center">
+        {/* Partners marquee-style grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {partners.map((partner, index) => (
             <div
               key={partner.name}
-              className="flex items-center justify-center p-4 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+              className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-muted/50 hover:bg-muted border border-transparent hover:border-border transition-all duration-300 hover-lift"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="w-24 h-12 bg-muted rounded flex items-center justify-center text-xs text-muted-foreground font-medium">
-                {partner.name}
+              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                <span className="text-lg font-bold text-primary group-hover:text-primary-foreground transition-colors">
+                  {partner.initials}
+                </span>
               </div>
+              <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors text-center font-medium">
+                {partner.name}
+              </span>
             </div>
           ))}
+        </div>
+
+        {/* Bottom accent line */}
+        <div className="mt-16 flex items-center justify-center gap-4">
+          <div className="h-px w-24 bg-gradient-to-r from-transparent to-border" />
+          <span className="text-sm text-muted-foreground">Working together for Ghana's export growth</span>
+          <div className="h-px w-24 bg-gradient-to-l from-transparent to-border" />
         </div>
       </div>
     </section>

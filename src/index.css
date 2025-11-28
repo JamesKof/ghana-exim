@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Ghana EXIM Bank Design System
+/* Ghana EXIM Bank Design System - GMFS Inspired
    Primary: Navy Blue - Professional trust
    Secondary: Gold/Yellow - Prosperity and excellence
-   Accent: Deep Blue - Authority
 */
 
 @layer base {
@@ -42,11 +41,12 @@
     --input: 220 20% 90%;
     --ring: 220 60% 25%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     /* Custom GEXIM colors */
     --gexim-navy: 220 60% 20%;
     --gexim-navy-light: 220 50% 30%;
+    --gexim-navy-dark: 220 65% 15%;
     --gexim-gold: 45 100% 50%;
     --gexim-gold-dark: 40 90% 45%;
     --gexim-blue: 210 80% 45%;
@@ -56,16 +56,19 @@
     --glass-bg: 0 0% 100%;
     --glass-border: 0 0% 100%;
 
-    /* Gradients */
-    --gradient-navy: linear-gradient(135deg, hsl(220 60% 20%) 0%, hsl(220 50% 30%) 100%);
+    /* Enhanced Gradients */
+    --gradient-navy: linear-gradient(135deg, hsl(220 60% 20%) 0%, hsl(210 70% 35%) 100%);
+    --gradient-navy-radial: radial-gradient(ellipse at top right, hsl(210 70% 35%) 0%, hsl(220 60% 20%) 70%);
     --gradient-gold: linear-gradient(135deg, hsl(45 100% 50%) 0%, hsl(40 90% 45%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsla(220, 60%, 15%, 0.7) 0%, hsla(220, 60%, 20%, 0.5) 100%);
+    --gradient-hero: linear-gradient(135deg, hsla(220, 60%, 15%, 0.85) 0%, hsla(210, 70%, 25%, 0.75) 100%);
 
     /* Shadows */
     --shadow-sm: 0 2px 8px -2px hsla(220, 60%, 20%, 0.1);
     --shadow-md: 0 4px 16px -4px hsla(220, 60%, 20%, 0.15);
     --shadow-lg: 0 8px 32px -8px hsla(220, 60%, 20%, 0.2);
+    --shadow-xl: 0 16px 48px -12px hsla(220, 60%, 20%, 0.25);
     --shadow-gold: 0 4px 20px -4px hsla(45, 100%, 50%, 0.4);
+    --shadow-gold-lg: 0 8px 32px -8px hsla(45, 100%, 50%, 0.5);
   }
 
   .dark {
@@ -110,6 +113,7 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -118,52 +122,138 @@
 }
 
 @layer components {
+  /* Glassmorphism styles */
   .glass {
     @apply bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border border-white/20 dark:border-slate-700/30;
   }
 
   .glass-nav {
-    background: hsla(0, 0%, 100%, 0.85);
+    background: hsla(0, 0%, 100%, 0.9);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid hsla(220, 20%, 90%, 0.5);
   }
 
+  .glass-dark {
+    background: hsla(220, 60%, 20%, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  /* Text gradient */
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, hsl(var(--gexim-gold)) 0%, hsl(var(--gexim-gold-dark)) 100%);
   }
 
+  .text-gradient-light {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(45, 100%, 60%) 0%, hsl(var(--gexim-gold)) 100%);
+  }
+
+  /* Buttons */
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 rounded-full;
   }
 
   .btn-gold {
-    @apply bg-accent text-accent-foreground font-semibold shadow-lg hover:shadow-xl transition-all duration-300;
-    box-shadow: var(--shadow-gold);
+    @apply bg-accent text-accent-foreground font-semibold transition-all duration-300 rounded-full;
+    box-shadow: 0 4px 20px -4px hsla(45, 100%, 50%, 0.4);
   }
 
   .btn-gold:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px -4px hsla(45, 100%, 50%, 0.5);
+  }
+
+  .btn-outline-light {
+    @apply border-2 border-white/40 text-white hover:bg-white/10 transition-all duration-300 rounded-full;
+  }
+
+  .btn-outline-light:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px -4px hsla(45, 100%, 50%, 0.5);
+    border-color: hsla(0, 0%, 100%, 0.6);
   }
 
+  /* Card styles */
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+    @apply transition-all duration-500 hover:shadow-xl;
   }
 
+  .card-hover:hover {
+    transform: translateY(-8px);
+  }
+
+  .card-gradient {
+    background: linear-gradient(180deg, hsla(220, 60%, 20%, 0.9) 0%, hsla(220, 60%, 15%, 0.95) 100%);
+  }
+
+  /* Section styles */
   .section-padding {
-    @apply py-16 md:py-24 lg:py-32;
+    @apply py-20 md:py-28 lg:py-36;
   }
 
   .container-custom {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .hero-overlay {
-    background: linear-gradient(180deg, hsla(220, 60%, 15%, 0.6) 0%, hsla(220, 60%, 20%, 0.8) 100%);
+  /* Curved sections */
+  .section-curve-top {
+    border-radius: 3rem 3rem 0 0;
   }
 
+  .section-curve-bottom {
+    border-radius: 0 0 3rem 3rem;
+  }
+
+  .section-curve-both {
+    border-radius: 3rem;
+  }
+
+  /* Hero overlay */
+  .hero-overlay {
+    background: linear-gradient(135deg, hsla(220, 60%, 15%, 0.85) 0%, hsla(210, 70%, 25%, 0.7) 50%, hsla(220, 60%, 20%, 0.8) 100%);
+  }
+
+  /* Navigation pill style */
+  .nav-pill {
+    @apply px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300;
+  }
+
+  .nav-pill-active {
+    @apply bg-accent text-accent-foreground;
+  }
+
+  /* Quick links panel */
+  .quick-links-panel {
+    background: linear-gradient(180deg, hsl(var(--gexim-navy)) 0%, hsl(var(--gexim-navy-light)) 100%);
+  }
+
+  .quick-link-item {
+    @apply flex items-center justify-between px-5 py-4 rounded-xl text-white/90 transition-all duration-300;
+    background: hsla(210, 70%, 40%, 0.3);
+  }
+
+  .quick-link-item:hover {
+    background: hsla(210, 70%, 45%, 0.4);
+    transform: translateX(4px);
+  }
+
+  /* Feature cards with image overlay */
+  .feature-card-overlay {
+    @apply relative overflow-hidden rounded-3xl;
+  }
+
+  .feature-card-overlay::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(180deg, transparent 0%, hsla(220, 60%, 15%, 0.9) 100%);
+  }
+
+  .feature-card-overlay .content {
+    @apply relative z-10;
+  }
+
+  /* Link underline animation */
   .link-underline {
     @apply relative;
   }
@@ -176,29 +266,70 @@
   .link-underline:hover::after {
     @apply w-full;
   }
+
+  /* Floating elements */
+  .float-element {
+    animation: floatAnimation 4s ease-in-out infinite;
+  }
+
+  /* Glow effects */
+  .glow-gold {
+    box-shadow: 0 0 40px hsla(45, 100%, 50%, 0.3);
+  }
+
+  .glow-navy {
+    box-shadow: 0 0 40px hsla(220, 60%, 30%, 0.3);
+  }
 }
 
 @layer utilities {
+  /* Animation classes */
   .animate-fade-up {
-    animation: fadeUp 0.6s ease-out forwards;
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .animate-fade-in {
-    animation: fadeIn 0.5s ease-out forwards;
+    animation: fadeIn 0.6s ease-out forwards;
   }
 
   .animate-scale-in {
-    animation: scaleIn 0.4s ease-out forwards;
+    animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
   .animate-slide-in-right {
-    animation: slideInRight 0.5s ease-out forwards;
+    animation: slideInRight 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
+  .animate-slide-in-left {
+    animation: slideInLeft 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-bounce-subtle {
+    animation: bounceSubtle 2s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: floatAnimation 4s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+    background-size: 200% 100%;
+  }
+
+  /* Keyframes */
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(40px);
     }
     to {
       opacity: 1;
@@ -214,7 +345,7 @@
   @keyframes scaleIn {
     from {
       opacity: 0;
-      transform: scale(0.95);
+      transform: scale(0.9);
     }
     to {
       opacity: 1;
@@ -225,7 +356,7 @@
   @keyframes slideInRight {
     from {
       opacity: 0;
-      transform: translateX(30px);
+      transform: translateX(50px);
     }
     to {
       opacity: 1;
@@ -233,9 +364,74 @@
     }
   }
 
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  .stagger-5 { animation-delay: 0.5s; }
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounceSubtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 20px hsla(45, 100%, 50%, 0.3); }
+    50% { box-shadow: 0 0 40px hsla(45, 100%, 50%, 0.6); }
+  }
+
+  @keyframes floatAnimation {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* Stagger delays */
+  .stagger-1 { animation-delay: 0.1s; opacity: 0; }
+  .stagger-2 { animation-delay: 0.2s; opacity: 0; }
+  .stagger-3 { animation-delay: 0.3s; opacity: 0; }
+  .stagger-4 { animation-delay: 0.4s; opacity: 0; }
+  .stagger-5 { animation-delay: 0.5s; opacity: 0; }
+  .stagger-6 { animation-delay: 0.6s; opacity: 0; }
+
+  /* Hover animations */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 30px hsla(45, 100%, 50%, 0.4);
+  }
 }
