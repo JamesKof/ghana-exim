@@ -1,5 +1,16 @@
 import { Layout } from "@/components/layout/Layout";
-import { CheckCircle2, Target, Eye, Users, Award, Briefcase, UserCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { CheckCircle2, Target, Eye, Users, Award, ArrowRight } from "lucide-react";
+
+// Leadership Photos
+import sylvesterMensahImg from "@/assets/leadership/sylvester-mensah-ceo.jpg";
+import mosesKluMensahImg from "@/assets/leadership/moses-klu-mensah.jpg";
+import victorEasmonImg from "@/assets/leadership/victor-easmon.jpg";
+import josephNyarkoteiImg from "@/assets/leadership/joseph-nyarkotei-dorh.jpg";
+import sampsonAhiImg from "@/assets/leadership/sampson-ahi.jpg";
+import matildaAsanteImg from "@/assets/leadership/matilda-asante-asiedu.jpg";
+import francisKwartengImg from "@/assets/leadership/francis-kwarteng-arthur.jpg";
+import robertAdamuImg from "@/assets/leadership/robert-akati-adamu.jpg";
 
 const functions = [
   "Provide credit facilities to an exporter or the exporter's bank, a buyer or the buyer's bank",
@@ -28,66 +39,51 @@ const mergedInstitutions = [
 
 const executiveManagement = [
   {
-    name: "Lawrence Agyinsam",
-    position: "Chief Executive Officer",
-    image: null,
+    name: "Hon. Sylvester Adinam Mensah",
+    position: "Chief Executive",
+    image: sylvesterMensahImg,
   },
   {
-    name: "Maxwell Asante Ofori",
-    position: "Deputy Chief Executive Officer - Finance",
-    image: null,
+    name: "Mr. Moses Klu Mensah",
+    position: "Deputy CEO – Banking",
+    image: mosesKluMensahImg,
   },
   {
-    name: "Benjamin Addo Obeng",
-    position: "Deputy Chief Executive Officer - Banking",
-    image: null,
+    name: "Mr. Victor Easmon",
+    position: "Deputy CEO – Finance & Admin",
+    image: victorEasmonImg,
   },
 ];
 
 const boardOfDirectors = [
   {
-    name: "Kwadwo Boateng Genfi",
+    name: "Dr. Joseph Nyarkotei Dorh",
     position: "Board Chairman",
+    image: josephNyarkoteiImg,
     isChairman: true,
   },
   {
-    name: "Lawrence Agyinsam",
-    position: "Member / CEO",
+    name: "Hon. Sampson Ahi",
+    position: "Board Member",
+    image: sampsonAhiImg,
     isChairman: false,
   },
   {
-    name: "Moses Asaga",
+    name: "Mrs. Matilda Asante-Asiedu",
     position: "Board Member",
+    image: matildaAsanteImg,
     isChairman: false,
   },
   {
-    name: "George Ofosuhene",
+    name: "Francis Kojo Kwarteng Arthur",
     position: "Board Member",
+    image: francisKwartengImg,
     isChairman: false,
   },
   {
-    name: "Nana Boateng Gyimah",
+    name: "Robert Akati Adamu",
     position: "Board Member",
-    isChairman: false,
-  },
-  {
-    name: "Daniel Larbi Tieku",
-    position: "Board Member",
-    isChairman: false,
-  },
-  {
-    name: "Albert Arthur",
-    position: "Board Member",
-    isChairman: false,
-  },
-  {
-    name: "Salim Abdul Hamid",
-    position: "Board Member",
-    isChairman: false,
-  },
-  {
-    name: "Abu Bakr Sadiq Mohammed",
-    position: "Board Member",
+    image: robertAdamuImg,
     isChairman: false,
   },
 ];
@@ -210,7 +206,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Executive Management */}
+      {/* Executive Management Preview */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-12">
@@ -230,10 +226,12 @@ const About = () => {
                 key={exec.name} 
                 className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-gexim transition-all duration-300 group"
               >
-                <div className="aspect-[4/5] bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-                  <div className="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center">
-                    <UserCircle className="w-20 h-20 text-primary/60" />
-                  </div>
+                <div className="aspect-[4/5] overflow-hidden">
+                  <img
+                    src={exec.image}
+                    alt={exec.name}
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
@@ -244,10 +242,19 @@ const About = () => {
               </div>
             ))}
           </div>
+          <div className="text-center mt-10">
+            <Link
+              to="/leadership"
+              className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+            >
+              View Full Leadership Team
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Board of Directors */}
+      {/* Board of Directors Preview */}
       <section className="section-padding bg-background">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-12">
@@ -263,37 +270,59 @@ const About = () => {
           </div>
           
           {/* Chairman - Featured */}
-          <div className="max-w-md mx-auto mb-12">
+          <div className="max-w-sm mx-auto mb-10">
             {boardOfDirectors.filter(d => d.isChairman).map((director) => (
               <div 
                 key={director.name}
-                className="bg-primary rounded-2xl p-8 text-center"
+                className="bg-primary rounded-2xl overflow-hidden shadow-gexim group"
               >
-                <div className="w-24 h-24 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
-                  <Briefcase className="w-12 h-12 text-accent" />
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={director.image}
+                    alt={director.name}
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
-                <h3 className="text-2xl font-bold text-primary-foreground mb-2">
-                  {director.name}
-                </h3>
-                <p className="text-accent font-medium">{director.position}</p>
+                <div className="p-6 text-center">
+                  <h3 className="text-xl font-bold text-primary-foreground mb-1">
+                    {director.name}
+                  </h3>
+                  <p className="text-accent font-medium">{director.position}</p>
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Board Members */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {/* Board Members Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
             {boardOfDirectors.filter(d => !d.isChairman).map((director) => (
               <div 
                 key={director.name}
-                className="bg-card rounded-xl p-6 text-center shadow-sm hover:shadow-gexim transition-shadow"
+                className="bg-card rounded-xl overflow-hidden shadow-sm hover:shadow-gexim transition-shadow group"
               >
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-8 h-8 text-primary" />
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={director.image}
+                    alt={director.name}
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
-                <h3 className="font-bold text-foreground mb-1">{director.name}</h3>
-                <p className="text-sm text-muted-foreground">{director.position}</p>
+                <div className="p-3 text-center">
+                  <h3 className="font-bold text-foreground text-sm mb-0.5 line-clamp-2">{director.name}</h3>
+                  <p className="text-xs text-muted-foreground">{director.position}</p>
+                </div>
               </div>
             ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              to="/leadership"
+              className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+            >
+              View Complete Board
+              <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </section>

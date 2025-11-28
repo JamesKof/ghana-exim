@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Preloader } from "@/components/Preloader";
 import Index from "./pages/Index";
 import About from "./pages/About";
+import Leadership from "./pages/Leadership";
 import Products from "./pages/Products";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
@@ -33,8 +34,11 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
-            <Route path="/about/board" element={<About />} />
-            <Route path="/about/management" element={<About />} />
+            <Route path="/about/board" element={<Leadership />} />
+            <Route path="/about/management" element={<Leadership />} />
+            <Route path="/leadership" element={<Leadership />} />
+            <Route path="/leadership/board" element={<Leadership />} />
+            <Route path="/leadership/management" element={<Leadership />} />
             <Route path="/products" element={<Products />} />
             <Route path="/services" element={<Services />} />
             <Route path="/contact" element={<Contact />} />

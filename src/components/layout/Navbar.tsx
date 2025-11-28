@@ -12,8 +12,9 @@ const mainNavItems = [
     href: "/about",
     children: [
       { name: "About GEXIM", href: "/about" },
-      { name: "Board of Directors", href: "/about/board" },
-      { name: "Management Team", href: "/about/management" },
+      { name: "Leadership", href: "/leadership" },
+      { name: "Board of Directors", href: "/leadership/board" },
+      { name: "Executive Management", href: "/leadership/management" },
     ],
   },
   {
