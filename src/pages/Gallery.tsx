@@ -1,12 +1,15 @@
 import { Layout } from "@/components/layout/Layout";
 
 const images = [
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800",
-  "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800",
-  "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800",
-  "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800",
-  "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800",
-  "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800",
+  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800",
+  "https://images.unsplash.com/photo-1590523278191-995cbcda646b?w=800",
+  "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?w=800",
+  "https://images.unsplash.com/photo-1580746738099-2aa20ebfea4d?w=800",
+  "https://images.unsplash.com/photo-1612810806695-30f7a8258391?w=800",
+  "https://images.unsplash.com/photo-1604689598793-b8bf1dc445a1?w=800",
+  "https://images.unsplash.com/photo-1589519160732-57fc498494f8?w=800",
+  "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800",
+  "https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?w=800",
 ];
 
 const Gallery = () => {
