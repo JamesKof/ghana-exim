@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import geximLogo from "@/assets/gexim-logo.png";
 
 const mainNavItems = [
   { name: "Home", href: "/" },
   {
-    name: "Our Profile",
+    name: "Who We Are",
     href: "/about",
     children: [
       { name: "About GEXIM", href: "/about" },
@@ -15,10 +15,16 @@ const mainNavItems = [
       { name: "Management Team", href: "/about/management" },
     ],
   },
-  { name: "Products", href: "/products" },
-  { name: "Services", href: "/services" },
   {
-    name: "Knowledge Hub",
+    name: "What We Do",
+    href: "/products",
+    children: [
+      { name: "Products", href: "/products" },
+      { name: "Services", href: "/services" },
+    ],
+  },
+  {
+    name: "Insights",
     href: "/news",
     children: [
       { name: "News", href: "/news" },
@@ -26,15 +32,8 @@ const mainNavItems = [
       { name: "Gallery", href: "/gallery" },
     ],
   },
-  { name: "Contact Us", href: "/contact" },
   { name: "FAQs", href: "/faqs" },
-];
-
-const topNavItems = [
-  { name: "News", href: "/news" },
-  { name: "Gallery", href: "/gallery" },
-  { name: "Events", href: "/events" },
-  { name: "Career/Jobs", href: "/careers" },
+  { name: "Careers", href: "/careers" },
 ];
 
 export function Navbar() {
@@ -45,7 +44,7 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -56,49 +55,35 @@ export function Navbar() {
     setOpenDropdown(null);
   }, [location.pathname]);
 
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50">
-      {/* Top bar */}
-      <div className="bg-primary text-primary-foreground">
-        <div className="container-custom">
-          <div className="flex justify-end items-center h-10 text-sm">
-            <nav className="hidden md:flex items-center gap-6">
-              {topNavItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="hover:text-accent transition-colors duration-200"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
-        </div>
-      </div>
+  const isHomePage = location.pathname === "/";
 
-      {/* Main navbar with glassmorphism */}
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 lg:px-8 pt-4">
+      {/* Main navbar - Floating pill style */}
       <nav
         className={cn(
-          "transition-all duration-300",
-          isScrolled
-            ? "glass-nav shadow-gexim"
-            : "bg-white/95 backdrop-blur-sm"
+          "max-w-7xl mx-auto rounded-full transition-all duration-500",
+          isScrolled || !isHomePage
+            ? "glass-nav shadow-gexim-lg"
+            : "bg-white/10 backdrop-blur-md border border-white/20"
         )}
       >
-        <div className="container-custom">
-          <div className="flex items-center justify-between h-20">
+        <div className="px-4 lg:px-8">
+          <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link to="/" className="flex-shrink-0">
               <img
                 src={geximLogo}
                 alt="Ghana EXIM Bank"
-                className="h-14 w-auto"
+                className={cn(
+                  "h-10 lg:h-12 w-auto transition-all duration-300",
+                  !isScrolled && isHomePage && "brightness-0 invert"
+                )}
               />
             </Link>
 
-            {/* Desktop navigation */}
-            <div className="hidden lg:flex items-center gap-1">
+            {/* Desktop navigation - Centered */}
+            <div className="hidden lg:flex items-center gap-1 bg-black/5 dark:bg-white/5 rounded-full p-1.5">
               {mainNavItems.map((item) => (
                 <div
                   key={item.name}
@@ -109,27 +94,34 @@ export function Navbar() {
                   <Link
                     to={item.href}
                     className={cn(
-                      "flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200",
+                      "nav-pill flex items-center gap-1",
                       location.pathname === item.href
-                        ? "text-primary bg-primary/5"
-                        : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                        ? isScrolled || !isHomePage
+                          ? "nav-pill-active"
+                          : "bg-white/20 text-white"
+                        : isScrolled || !isHomePage
+                        ? "text-foreground/80 hover:text-foreground hover:bg-muted"
+                        : "text-white/90 hover:text-white hover:bg-white/10"
                     )}
                   >
                     {item.name}
                     {item.children && (
-                      <ChevronDown className="w-4 h-4" />
+                      <ChevronDown className={cn(
+                        "w-3 h-3 transition-transform",
+                        openDropdown === item.name && "rotate-180"
+                      )} />
                     )}
                   </Link>
 
                   {/* Dropdown */}
                   {item.children && openDropdown === item.name && (
-                    <div className="absolute top-full left-0 pt-2 animate-fade-in">
-                      <div className="glass rounded-xl shadow-gexim-lg py-2 min-w-[200px]">
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 animate-fade-in">
+                      <div className="glass rounded-2xl shadow-gexim-xl py-2 min-w-[220px] overflow-hidden">
                         {item.children.map((child) => (
                           <Link
                             key={child.name}
                             to={child.href}
-                            className="block px-4 py-2.5 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors"
+                            className="block px-5 py-3 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all"
                           >
                             {child.name}
                           </Link>
@@ -142,19 +134,36 @@ export function Navbar() {
             </div>
 
             {/* CTA Button */}
-            <div className="hidden lg:block">
+            <div className="hidden lg:flex items-center gap-3">
+              <Link
+                to="/contact"
+                className={cn(
+                  "p-3 rounded-full transition-all duration-300",
+                  isScrolled || !isHomePage
+                    ? "bg-muted text-foreground hover:bg-muted/80"
+                    : "bg-white/10 text-white hover:bg-white/20"
+                )}
+                title="Contact Us"
+              >
+                <MessageCircle className="w-5 h-5" />
+              </Link>
               <Link
                 to="/apply"
-                className="btn-gold px-6 py-3 rounded-lg text-sm font-semibold"
+                className="btn-gold px-6 py-3 text-sm font-semibold"
               >
-                Apply for Facility
+                Get Help
               </Link>
             </div>
 
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+              className={cn(
+                "lg:hidden p-2 rounded-full transition-colors",
+                isScrolled || !isHomePage
+                  ? "hover:bg-muted text-foreground"
+                  : "hover:bg-white/10 text-white"
+              )}
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -167,29 +176,29 @@ export function Navbar() {
 
         {/* Mobile menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden glass border-t border-border animate-fade-in">
-            <div className="container-custom py-4">
-              <nav className="space-y-1">
+          <div className="lg:hidden glass-nav border-t border-border/50 rounded-b-3xl animate-fade-in">
+            <div className="px-4 py-6">
+              <nav className="space-y-2">
                 {mainNavItems.map((item) => (
                   <div key={item.name}>
                     <Link
                       to={item.href}
                       className={cn(
-                        "block px-4 py-3 rounded-lg text-sm font-medium transition-colors",
+                        "block px-4 py-3 rounded-xl text-sm font-medium transition-colors",
                         location.pathname === item.href
-                          ? "text-primary bg-primary/5"
+                          ? "text-accent-foreground bg-accent"
                           : "text-foreground/80 hover:text-primary hover:bg-primary/5"
                       )}
                     >
                       {item.name}
                     </Link>
                     {item.children && (
-                      <div className="ml-4 mt-1 space-y-1">
+                      <div className="ml-4 mt-2 space-y-1 border-l-2 border-border pl-4">
                         {item.children.map((child) => (
                           <Link
                             key={child.name}
                             to={child.href}
-                            className="block px-4 py-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                            className="block py-2 text-sm text-muted-foreground hover:text-primary transition-colors"
                           >
                             {child.name}
                           </Link>
@@ -198,12 +207,18 @@ export function Navbar() {
                     )}
                   </div>
                 ))}
-                <div className="pt-4">
+                <div className="pt-4 space-y-3">
+                  <Link
+                    to="/contact"
+                    className="block text-center px-6 py-3 rounded-full text-sm font-semibold border border-border hover:bg-muted transition-colors"
+                  >
+                    Contact Us
+                  </Link>
                   <Link
                     to="/apply"
-                    className="btn-gold block text-center px-6 py-3 rounded-lg text-sm font-semibold"
+                    className="btn-gold block text-center px-6 py-3 text-sm font-semibold"
                   >
-                    Apply for Facility
+                    Get Help
                   </Link>
                 </div>
               </nav>
