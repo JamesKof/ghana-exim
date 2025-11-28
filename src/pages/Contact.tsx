@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { useState } from "react";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const offices = [
   {
@@ -74,25 +75,44 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        entity_type: formData.entityType,
+        interest: formData.interest,
+        title: formData.title || null,
+        name: formData.name,
+        organization: formData.organization,
+        phone: formData.phone,
+        email: formData.email,
+        message: formData.message,
+      });
 
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting us. We will get back to you shortly.",
-    });
+      if (error) throw error;
 
-    setFormData({
-      entityType: "",
-      interest: "",
-      title: "",
-      name: "",
-      organization: "",
-      phone: "",
-      email: "",
-      message: "",
-    });
-    setIsSubmitting(false);
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting us. We will get back to you shortly.",
+      });
+
+      setFormData({
+        entityType: "",
+        interest: "",
+        title: "",
+        name: "",
+        organization: "",
+        phone: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
