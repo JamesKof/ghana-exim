@@ -69,13 +69,13 @@ export function Navbar() {
         "fixed left-0 right-0 z-50 px-4 lg:px-8 pt-4 transition-all duration-300",
         "top-0 lg:top-10"
       )}>
-        {/* Main navbar - Floating pill style with 90% opacity */}
+        {/* Main navbar - Floating pill style with increased transparency */}
         <nav
           className={cn(
             "max-w-7xl mx-auto rounded-full transition-all duration-500 shadow-gexim-lg",
             isScrolled || !isHomePage
-              ? "bg-white/90 backdrop-blur-xl border border-white/20"
-              : "bg-white/90 backdrop-blur-xl border border-white/20"
+              ? "bg-white/70 backdrop-blur-xl border border-white/30"
+              : "bg-white/60 backdrop-blur-xl border border-white/20"
           )}
         >
           <div className="px-4 lg:px-8">

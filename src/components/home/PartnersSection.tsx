@@ -1,10 +1,34 @@
 const partners = [
-  { name: "GEPA", initials: "GEPA" },
-  { name: "Ghana Trade Association", initials: "GTA" },
-  { name: "Hungary EXIM", initials: "HEXIM" },
-  { name: "G-NEXID", initials: "GNX" },
-  { name: "Ministry of Trade", initials: "MoTI" },
-  { name: "Afreximbank", initials: "AFX" },
+  { 
+    name: "GEPA", 
+    fullName: "Ghana Export Promotion Authority",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Coat_of_arms_of_Ghana.svg/200px-Coat_of_arms_of_Ghana.svg.png"
+  },
+  { 
+    name: "Afreximbank", 
+    fullName: "African Export-Import Bank",
+    logo: "https://www.afreximbank.com/wp-content/themes/developer-developer/assets/images/logo.svg"
+  },
+  { 
+    name: "MoTI", 
+    fullName: "Ministry of Trade & Industry",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Coat_of_arms_of_Ghana.svg/200px-Coat_of_arms_of_Ghana.svg.png"
+  },
+  { 
+    name: "Bank of Ghana", 
+    fullName: "Central Bank of Ghana",
+    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Bank_of_Ghana_logo.svg/200px-Bank_of_Ghana_logo.svg.png"
+  },
+  { 
+    name: "AGI", 
+    fullName: "Association of Ghana Industries",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Coat_of_arms_of_Ghana.svg/200px-Coat_of_arms_of_Ghana.svg.png"
+  },
+  { 
+    name: "GNCCI", 
+    fullName: "Ghana National Chamber of Commerce",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Coat_of_arms_of_Ghana.svg/200px-Coat_of_arms_of_Ghana.svg.png"
+  },
 ];
 
 export function PartnersSection() {
@@ -25,7 +49,7 @@ export function PartnersSection() {
           </h2>
         </div>
 
-        {/* Partners marquee-style grid */}
+        {/* Partners grid with real logos */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {partners.map((partner, index) => (
             <div
@@ -33,13 +57,23 @@ export function PartnersSection() {
               className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-muted/50 hover:bg-muted border border-transparent hover:border-border transition-all duration-300 hover-lift"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                <span className="text-lg font-bold text-primary group-hover:text-primary-foreground transition-colors">
-                  {partner.initials}
+              <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-3 group-hover:scale-110 transition-all duration-300 overflow-hidden p-2 shadow-sm">
+                <img 
+                  src={partner.logo} 
+                  alt={partner.fullName}
+                  className="w-full h-full object-contain"
+                  onError={(e) => {
+                    // Fallback to initials if image fails
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                  }}
+                />
+                <span className="hidden text-lg font-bold text-primary">
+                  {partner.name}
                 </span>
               </div>
               <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors text-center font-medium">
-                {partner.name}
+                {partner.fullName}
               </span>
             </div>
           ))}
