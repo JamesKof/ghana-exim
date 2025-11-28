@@ -74,7 +74,7 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="container-custom relative z-10 pt-32 pb-20">
+      <div className="container-custom relative z-10 pt-44 lg:pt-48 pb-20">
         <div className="grid lg:grid-cols-5 gap-12 items-center">
           {/* Main Content - 3 columns */}
           <div className="lg:col-span-3">
