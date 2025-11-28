@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout/Layout";
-import { CheckCircle2, Target, Eye, Users, Award } from "lucide-react";
+import { CheckCircle2, Target, Eye, Users, Award, Briefcase, UserCircle } from "lucide-react";
 
 const functions = [
   "Provide credit facilities to an exporter or the exporter's bank, a buyer or the buyer's bank",
@@ -23,6 +23,72 @@ const mergedInstitutions = [
   {
     name: "Ghana Export Trade Houses",
     description: "Facilitating Ghana's export trade operations",
+  },
+];
+
+const executiveManagement = [
+  {
+    name: "Lawrence Agyinsam",
+    position: "Chief Executive Officer",
+    image: null,
+  },
+  {
+    name: "Maxwell Asante Ofori",
+    position: "Deputy Chief Executive Officer - Finance",
+    image: null,
+  },
+  {
+    name: "Benjamin Addo Obeng",
+    position: "Deputy Chief Executive Officer - Banking",
+    image: null,
+  },
+];
+
+const boardOfDirectors = [
+  {
+    name: "Kwadwo Boateng Genfi",
+    position: "Board Chairman",
+    isChairman: true,
+  },
+  {
+    name: "Lawrence Agyinsam",
+    position: "Member / CEO",
+    isChairman: false,
+  },
+  {
+    name: "Moses Asaga",
+    position: "Board Member",
+    isChairman: false,
+  },
+  {
+    name: "George Ofosuhene",
+    position: "Board Member",
+    isChairman: false,
+  },
+  {
+    name: "Nana Boateng Gyimah",
+    position: "Board Member",
+    isChairman: false,
+  },
+  {
+    name: "Daniel Larbi Tieku",
+    position: "Board Member",
+    isChairman: false,
+  },
+  {
+    name: "Albert Arthur",
+    position: "Board Member",
+    isChairman: false,
+  },
+  {
+    name: "Salim Abdul Hamid",
+    position: "Board Member",
+    isChairman: false,
+  },
+  {
+    name: "Abu Bakr Sadiq Mohammed",
+    position: "Board Member",
+    isChairman: false,
   },
 ];
 
@@ -128,7 +194,7 @@ const About = () => {
               </div>
               <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
               <p className="text-primary-foreground/80 text-lg">
-                To be the leading export finance institution in Africa, driving sustainable economic growth through innovative financial solutions.
+                To become a strong financial institution that will be a key engine in the development of Ghana's export trade and the promotion of investments in exportable goods and services.
               </p>
             </div>
             <div className="bg-accent rounded-3xl p-10 text-accent-foreground">
@@ -137,9 +203,97 @@ const About = () => {
               </div>
               <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
               <p className="text-accent-foreground/80 text-lg">
-                To provide competitive financial products and services that support the development of Ghana's export sector and enhance international trade.
+                To facilitate the transformation of Ghana's economy into an export one, by supporting, promoting and financing Ghanaian exporters, especially value-added goods and services.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Executive Management */}
+      <section className="section-padding bg-muted">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-accent font-semibold text-sm uppercase tracking-wider">
+              Leadership
+            </span>
+            <h2 className="text-display-sm text-foreground mt-3 mb-6">
+              Executive Management
+            </h2>
+            <p className="text-muted-foreground">
+              Our experienced leadership team driving GEXIM's mission forward
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {executiveManagement.map((exec) => (
+              <div 
+                key={exec.name} 
+                className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-gexim transition-all duration-300 group"
+              >
+                <div className="aspect-[4/5] bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
+                  <div className="w-32 h-32 rounded-full bg-primary/20 flex items-center justify-center">
+                    <UserCircle className="w-20 h-20 text-primary/60" />
+                  </div>
+                </div>
+                <div className="p-6 text-center">
+                  <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {exec.name}
+                  </h3>
+                  <p className="text-muted-foreground text-sm">{exec.position}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Board of Directors */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-accent font-semibold text-sm uppercase tracking-wider">
+              Governance
+            </span>
+            <h2 className="text-display-sm text-foreground mt-3 mb-6">
+              Board of Directors
+            </h2>
+            <p className="text-muted-foreground">
+              Distinguished professionals guiding GEXIM's strategic direction
+            </p>
+          </div>
+          
+          {/* Chairman - Featured */}
+          <div className="max-w-md mx-auto mb-12">
+            {boardOfDirectors.filter(d => d.isChairman).map((director) => (
+              <div 
+                key={director.name}
+                className="bg-primary rounded-2xl p-8 text-center"
+              >
+                <div className="w-24 h-24 rounded-full bg-accent/20 flex items-center justify-center mx-auto mb-4">
+                  <Briefcase className="w-12 h-12 text-accent" />
+                </div>
+                <h3 className="text-2xl font-bold text-primary-foreground mb-2">
+                  {director.name}
+                </h3>
+                <p className="text-accent font-medium">{director.position}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Board Members */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {boardOfDirectors.filter(d => !d.isChairman).map((director) => (
+              <div 
+                key={director.name}
+                className="bg-card rounded-xl p-6 text-center shadow-sm hover:shadow-gexim transition-shadow"
+              >
+                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <Users className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="font-bold text-foreground mb-1">{director.name}</h3>
+                <p className="text-sm text-muted-foreground">{director.position}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
