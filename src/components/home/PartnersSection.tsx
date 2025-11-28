@@ -1,33 +1,40 @@
+import gepaLogo from "@/assets/partners/gepa-logo.png";
+import afreximLogo from "@/assets/partners/afreximbank-logo.png";
+import motiLogo from "@/assets/partners/moti-logo.png";
+import bogLogo from "@/assets/partners/bog-logo.png";
+import agiLogo from "@/assets/partners/agi-logo.png";
+import gncciLogo from "@/assets/partners/gncci-logo.png";
+
 const partners = [
   { 
     name: "GEPA", 
     fullName: "Ghana Export Promotion Authority",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Coat_of_arms_of_Ghana.svg/200px-Coat_of_arms_of_Ghana.svg.png"
+    logo: gepaLogo
   },
   { 
     name: "Afreximbank", 
     fullName: "African Export-Import Bank",
-    logo: "https://www.afreximbank.com/wp-content/themes/developer-developer/assets/images/logo.svg"
+    logo: afreximLogo
   },
   { 
     name: "MoTI", 
     fullName: "Ministry of Trade & Industry",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Coat_of_arms_of_Ghana.svg/200px-Coat_of_arms_of_Ghana.svg.png"
+    logo: motiLogo
   },
   { 
     name: "Bank of Ghana", 
     fullName: "Central Bank of Ghana",
-    logo: "https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Bank_of_Ghana_logo.svg/200px-Bank_of_Ghana_logo.svg.png"
+    logo: bogLogo
   },
   { 
     name: "AGI", 
     fullName: "Association of Ghana Industries",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Coat_of_arms_of_Ghana.svg/200px-Coat_of_arms_of_Ghana.svg.png"
+    logo: agiLogo
   },
   { 
     name: "GNCCI", 
     fullName: "Ghana National Chamber of Commerce",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Coat_of_arms_of_Ghana.svg/200px-Coat_of_arms_of_Ghana.svg.png"
+    logo: gncciLogo
   },
 ];
 
@@ -62,15 +69,7 @@ export function PartnersSection() {
                   src={partner.logo} 
                   alt={partner.fullName}
                   className="w-full h-full object-contain"
-                  onError={(e) => {
-                    // Fallback to initials if image fails
-                    e.currentTarget.style.display = 'none';
-                    e.currentTarget.nextElementSibling?.classList.remove('hidden');
-                  }}
                 />
-                <span className="hidden text-lg font-bold text-primary">
-                  {partner.name}
-                </span>
               </div>
               <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors text-center font-medium">
                 {partner.fullName}
