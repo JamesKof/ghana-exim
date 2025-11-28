@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import geximLogo from "@/assets/gexim-logo.png";
+import { TopBar } from "./TopBar";
 
 const mainNavItems = [
   { name: "Home", href: "/" },
@@ -58,26 +59,35 @@ export function Navbar() {
   const isHomePage = location.pathname === "/";
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 px-4 lg:px-8 pt-4">
-      {/* Main navbar - Floating pill style with 90% opacity */}
-      <nav
-        className={cn(
-          "max-w-7xl mx-auto rounded-full transition-all duration-500 shadow-gexim-lg",
-          isScrolled || !isHomePage
-            ? "bg-white/90 backdrop-blur-xl border border-white/20"
-            : "bg-white/90 backdrop-blur-xl border border-white/20"
-        )}
-      >
-        <div className="px-4 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Sticky Logo - Always visible */}
-            <Link to="/" className="flex-shrink-0">
-              <img
-                src={geximLogo}
-                alt="Ghana EXIM Bank"
-                className="h-10 lg:h-12 w-auto transition-all duration-300"
-              />
-            </Link>
+    <>
+      {/* Top Bar with contact info */}
+      <div className="fixed top-0 left-0 right-0 z-50">
+        <TopBar />
+      </div>
+      
+      <header className={cn(
+        "fixed left-0 right-0 z-50 px-4 lg:px-8 pt-4 transition-all duration-300",
+        "top-0 lg:top-10"
+      )}>
+        {/* Main navbar - Floating pill style with 90% opacity */}
+        <nav
+          className={cn(
+            "max-w-7xl mx-auto rounded-full transition-all duration-500 shadow-gexim-lg",
+            isScrolled || !isHomePage
+              ? "bg-white/90 backdrop-blur-xl border border-white/20"
+              : "bg-white/90 backdrop-blur-xl border border-white/20"
+          )}
+        >
+          <div className="px-4 lg:px-8">
+            <div className="flex items-center justify-between h-16 lg:h-20">
+              {/* Sticky Logo - Always visible with hover glow */}
+              <Link to="/" className="flex-shrink-0 group">
+                <img
+                  src={geximLogo}
+                  alt="Ghana EXIM Bank"
+                  className="h-10 lg:h-12 w-auto transition-all duration-300 group-hover:drop-shadow-[0_0_12px_rgba(0,86,63,0.4)] group-hover:scale-105"
+                />
+              </Link>
 
             {/* Desktop navigation - Centered */}
             <div className="hidden lg:flex items-center gap-1 bg-muted/50 rounded-full p-1.5">
@@ -208,7 +218,8 @@ export function Navbar() {
             </div>
           </div>
         )}
-      </nav>
-    </header>
+        </nav>
+      </header>
+    </>
   );
 }
