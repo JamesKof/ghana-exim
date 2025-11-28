@@ -1,8 +1,10 @@
 import { Layout } from "@/components/layout/Layout";
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+
+const BranchLocationsMap = lazy(() => import("@/components/BranchLocationsMap"));
 
 const offices = [
   {
@@ -299,18 +301,37 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Office Locations */}
+      {/* Interactive Map */}
       <section className="section-padding bg-muted">
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-accent font-semibold text-sm uppercase tracking-wider">
-              Our Locations
+              Find Us
             </span>
-            <h2 className="text-display-sm text-foreground mt-3">
-              Office Locations
+            <h2 className="text-display-sm text-foreground mt-3 mb-4">
+              Our Branch Locations
             </h2>
+            <p className="text-muted-foreground">
+              Visit any of our branches across Ghana. Click on a marker to view branch details.
+            </p>
           </div>
 
+          <Suspense fallback={
+            <div className="h-[500px] rounded-3xl bg-card flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                <p className="text-muted-foreground">Loading map...</p>
+              </div>
+            </div>
+          }>
+            <BranchLocationsMap />
+          </Suspense>
+        </div>
+      </section>
+
+      {/* Office Cards */}
+      <section className="section-padding bg-background">
+        <div className="container-custom">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {offices.map((office) => (
               <div key={office.city} className="bg-card rounded-2xl p-6 shadow-sm hover:shadow-gexim transition-shadow">
