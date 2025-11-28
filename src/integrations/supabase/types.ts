@@ -14,7 +14,135 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contact_submissions: {
+        Row: {
+          created_at: string
+          email: string
+          entity_type: string
+          id: string
+          interest: string
+          message: string
+          name: string
+          organization: string
+          phone: string
+          status: string
+          title: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          entity_type: string
+          id?: string
+          interest: string
+          message: string
+          name: string
+          organization: string
+          phone: string
+          status?: string
+          title?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          entity_type?: string
+          id?: string
+          interest?: string
+          message?: string
+          name?: string
+          organization?: string
+          phone?: string
+          status?: string
+          title?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      facility_applications: {
+        Row: {
+          additional_info: string | null
+          amount_requested: number | null
+          annual_revenue: string | null
+          business_name: string
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          contact_title: string | null
+          created_at: string
+          currency: string | null
+          date_of_incorporation: string | null
+          employee_count: string | null
+          entity_type: string
+          export_experience: string | null
+          facility_type: string
+          id: string
+          industry: string
+          purpose: string
+          registration_number: string | null
+          repayment_period: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          updated_at: string
+          years_in_business: string | null
+        }
+        Insert: {
+          additional_info?: string | null
+          amount_requested?: number | null
+          annual_revenue?: string | null
+          business_name: string
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          contact_title?: string | null
+          created_at?: string
+          currency?: string | null
+          date_of_incorporation?: string | null
+          employee_count?: string | null
+          entity_type: string
+          export_experience?: string | null
+          facility_type: string
+          id?: string
+          industry: string
+          purpose: string
+          registration_number?: string | null
+          repayment_period?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+          years_in_business?: string | null
+        }
+        Update: {
+          additional_info?: string | null
+          amount_requested?: number | null
+          annual_revenue?: string | null
+          business_name?: string
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          contact_title?: string | null
+          created_at?: string
+          currency?: string | null
+          date_of_incorporation?: string | null
+          employee_count?: string | null
+          entity_type?: string
+          export_experience?: string | null
+          facility_type?: string
+          id?: string
+          industry?: string
+          purpose?: string
+          registration_number?: string | null
+          repayment_period?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
+          years_in_business?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
