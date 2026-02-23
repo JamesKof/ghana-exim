@@ -18,6 +18,7 @@ import Apply from "./pages/Apply";
 import Careers from "./pages/Careers";
 import Gallery from "./pages/Gallery";
 import Events from "./pages/Events";
+import Downloads from "./pages/Downloads";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +53,7 @@ const App = () => {
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/events" element={<Events />} />
             <Route path="/export-facility" element={<Products />} />
+            <Route path="/downloads" element={<Downloads />} />
             <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
