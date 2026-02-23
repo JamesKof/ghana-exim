@@ -1,15 +1,15 @@
 import { Layout } from "@/components/layout/Layout";
 
 const images = [
-  "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800",
-  "https://images.unsplash.com/photo-1590523278191-995cbcda646b?w=800",
-  "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?w=800",
-  "https://images.unsplash.com/photo-1580746738099-2aa20ebfea4d?w=800",
-  "https://images.unsplash.com/photo-1612810806695-30f7a8258391?w=800",
-  "https://images.unsplash.com/photo-1604689598793-b8bf1dc445a1?w=800",
-  "https://images.unsplash.com/photo-1589519160732-57fc498494f8?w=800",
-  "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800",
-  "https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?w=800",
+  "https://eximbankghana.com/wp-content/uploads/2024/09/IMG_1711-1-1-scaled-e1727254992403.jpg",
+  "https://eximbankghana.com/wp-content/uploads/2025/08/Board-with-Minister-1024x683.jpeg",
+  "https://eximbankghana.com/wp-content/uploads/2025/05/GEXIM-DEEPENS-RELATIONS-WITH-US-EXIM-BANK1-1024x768.jpeg",
+  "https://eximbankghana.com/wp-content/uploads/2025/05/british_img_1.jpeg",
+  "https://eximbankghana.com/wp-content/uploads/2025/02/Hon_Sylvester_-Mensah-1024x682.jpg",
+  "https://eximbankghana.com/wp-content/uploads/2024/05/63551661.jpg",
+  "https://eximbankghana.com/wp-content/uploads/2024/05/ex-6.jpeg",
+  "https://eximbankghana.com/wp-content/uploads/2024/05/gambian2.jpg",
+  "https://eximbankghana.com/wp-content/uploads/2024/05/b1.jpg",
 ];
 
 const Gallery = () => {

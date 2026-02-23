@@ -13,34 +13,34 @@ const objectives = [
 
 const galleryImages = [
   {
-    url: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600",
-    alt: "Accra business district skyline",
-    caption: "Accra Business Hub"
+    url: "https://eximbankghana.com/wp-content/uploads/2024/09/IMG_1711-1-1-scaled-e1727254992403.jpg",
+    alt: "Ghana EXIM Bank headquarters",
+    caption: "Africa Trade House"
   },
   {
-    url: "https://images.unsplash.com/photo-1590523278191-995cbcda646b?w=600",
-    alt: "African trade and commerce",
-    caption: "Driving Trade Growth"
+    url: "https://eximbankghana.com/wp-content/uploads/2025/08/Board-with-Minister-1024x683.jpeg",
+    alt: "GEXIM Board with Minister",
+    caption: "Board Inauguration"
   },
   {
-    url: "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?w=600",
-    alt: "Ghana port and shipping",
-    caption: "Export Infrastructure"
+    url: "https://eximbankghana.com/wp-content/uploads/2025/05/GEXIM-DEEPENS-RELATIONS-WITH-US-EXIM-BANK1-1024x768.jpeg",
+    alt: "GEXIM and US EXIM Bank meeting",
+    caption: "International Partnerships"
   },
   {
-    url: "https://images.unsplash.com/photo-1580746738099-2aa20ebfea4d?w=600",
-    alt: "Cocoa beans production Ghana",
-    caption: "Agricultural Exports"
+    url: "https://eximbankghana.com/wp-content/uploads/2025/02/Hon_Sylvester_-Mensah-1024x682.jpg",
+    alt: "CEO Hon. Sylvester Mensah addressing staff",
+    caption: "CEO Engages Staff"
   },
   {
-    url: "https://images.unsplash.com/photo-1612810806695-30f7a8258391?w=600",
-    alt: "African business professionals",
-    caption: "Expert Advisory Team"
+    url: "https://eximbankghana.com/wp-content/uploads/2025/05/british_img_1.jpeg",
+    alt: "British High Commissioner meets GEXIM",
+    caption: "Diplomatic Engagements"
   },
   {
-    url: "https://images.unsplash.com/photo-1604689598793-b8bf1dc445a1?w=600",
-    alt: "Modern African architecture",
-    caption: "Modern Ghana"
+    url: "https://eximbankghana.com/wp-content/uploads/2024/05/63551661.jpg",
+    alt: "India EXIM Bank courtesy call",
+    caption: "Global Collaborations"
   },
 ];
 
