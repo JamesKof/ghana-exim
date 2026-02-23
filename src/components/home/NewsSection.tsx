@@ -3,31 +3,31 @@ import { ArrowRight, Calendar, ArrowUpRight } from "lucide-react";
 
 const newsItems = [
   {
-    title: "GHANA EXIMBANK GETS NEW BOARD TO DRIVE EXPORT AND INDUSTRIAL GROWTH",
-    date: "August 2025",
-    image: "https://images.unsplash.com/photo-1612810806695-30f7a8258391?w=600",
-    slug: "new-board-2025",
+    title: "GEXIM LAUNCHES 10TH ANNIVERSARY CELEBRATIONS WITH FOCUS ON EXPORT-LED INDUSTRIAL TRANSFORMATION",
+    date: "January 2026",
+    image: "https://eximbankghana.com/wp-content/uploads/2026/01/WhatsApp-Image-2026-01-14-at-14.49.59-1024x724.jpeg",
+    slug: "10th-anniversary-2026",
     featured: true,
   },
   {
+    title: "GHANA EXIMBANK GETS NEW BOARD TO DRIVE EXPORT AND INDUSTRIAL GROWTH",
+    date: "July 2025",
+    image: "https://eximbankghana.com/wp-content/uploads/2025/08/Board-with-Minister-1024x683.jpeg",
+    slug: "new-board-2025",
+    featured: false,
+  },
+  {
     title: "GEXIM DEEPENS RELATIONS WITH US EXIM BANK",
-    date: "May 2025",
-    image: "https://images.unsplash.com/photo-1590523278191-995cbcda646b?w=600",
+    date: "April 2025",
+    image: "https://eximbankghana.com/wp-content/uploads/2025/05/GEXIM-DEEPENS-RELATIONS-WITH-US-EXIM-BANK1-1024x768.jpeg",
     slug: "us-exim-relations",
     featured: false,
   },
   {
     title: "BRITISH HIGH COMMISSIONER ENGAGES GEXIM MANAGEMENT",
-    date: "May 2025",
-    image: "https://images.unsplash.com/photo-1604689598793-b8bf1dc445a1?w=600",
+    date: "February 2025",
+    image: "https://eximbankghana.com/wp-content/uploads/2025/05/british_img_1.jpeg",
     slug: "british-commissioner",
-    featured: false,
-  },
-  {
-    title: "GHANA EXPORT-IMPORT BANK PAYS OFF US$100 MILLION LOAN AHEAD OF SCHEDULE",
-    date: "May 2025",
-    image: "https://images.unsplash.com/photo-1580746738099-2aa20ebfea4d?w=600",
-    slug: "loan-payoff",
     featured: false,
   },
 ];

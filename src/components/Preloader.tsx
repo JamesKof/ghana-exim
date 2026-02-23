@@ -10,7 +10,7 @@ export function Preloader({ onLoadingComplete }: PreloaderProps) {
   const [isExiting, setIsExiting] = useState(false);
 
   useEffect(() => {
-    const duration = 2000; // 2 seconds total
+    const duration = 800; // 0.8 seconds total
     const interval = 20; // Update every 20ms
     const increment = 100 / (duration / interval);
 
